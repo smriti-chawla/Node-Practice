@@ -1,52 +1,6 @@
-// console.log('1111');
-// console.log(global);
-// //passing arhuments = > node first.js 'smriti'
-// console.log(process);
-// const ar=process.argv;
-//
-// console.log(ar);
-// 2) node first.js --name='smriti'
-// 3) node first.js --name 'smriti'
-
- // const args = require('yargs').argv;
-// const os=require('os');
-// const fs=require('fs');
-
-// fs.writeFileSync('abc.txt', 'test string');
-// fs.mkdirSync('abc');
-// fs.writeFileSync('abc/abc.txt', 'test string');
-// fs.writeFileSync('abc.json', json.stringify({name:'abc'}));
-// const text  = fs.readFileSync('abc.txt', 'utf8');
-// console.log(text);
-// console.log(os.userInfo());
-// console.log(args);
-//node first.js --name='smriti' --isVal
-
-// console.log(args.name);
-
 const args = require('yargs').argv;
-
-// console.log(args.operation == 'add');
-// console.log(args.operation);
 const fs=require('fs');
-// var myObj = {};
-//
-// var data = {
-//     title: args.title,
-//     desc: args.desc
-// };
-// console.log(data)
-// myObj['booksDetail'] = [];
-// myObj['booksDetail'].push(data);
-//
-// console.log(myObj, args.title, args.desc,111111111111);
-//
-// fs.writeFileSync('book.json', JSON.stringify(myObj), 'utf-8', function (err) {
-//     console.error(err)
-// });
-
-
-function appendObject(obj){
+const appendObject = function(obj){
     var configFile = fs.readFile('book.json','utf-8', function(err, data) {
             if (err) {
                 var book = [];
@@ -80,9 +34,9 @@ function appendObject(obj){
             }
     });
 
-}
+};
 
-function deleteObj(obj){
+const deleteObj = function(obj){
     var configFile = fs.readFile('book.json','utf-8', function(err, data) {
         if (err) {
             console.log("book file does not exist.");
@@ -107,9 +61,9 @@ function deleteObj(obj){
             return;
         }
     });
-}
+};
 
-function updateObj(obj){
+const updateObj =function(obj){
     var configFile = fs.readFile('book.json','utf-8', function(err, data) {
         if (err) {
             console.log("book file does not exist.");
@@ -133,38 +87,28 @@ function updateObj(obj){
             return;
         }
     });
-}
+};
 
-function viewObj(){
+const viewObj =function(){
     var configFile = fs.readFile('book.json','utf-8', function(err, data) {
         if (err) {
             console.log("book file does not exist.");
             return;
         }
         else {
-            // book = JSON.parse(data);
             console.log("Book record:",data);
             return;
         }
     });
-}
+};
 
-switch(args.action){
-    case "add":
-        appendObject({title : args.title, desc: args.desc});
-        break;
-    case "update":
-        updateObj({title : args.title, desc: args.desc});
-        break;
-    case "delete":
-        deleteObj({title : args.title, desc: args.desc});
-        break;
-    case "view":
-        viewObj();
-        break;
-    default:
-        break
-}
 
+
+module.exports = {
+    appendObject: appendObject,
+    deleteObj: deleteObj,
+    updateObj: updateObj,
+    viewObj: viewObj
+};
 
 
